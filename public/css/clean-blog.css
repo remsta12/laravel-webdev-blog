@@ -263,6 +263,18 @@ header.masthead .post-heading .meta a {
   }
 }
 
+.post {
+  color: #212529;
+  font-size: 14px;
+}
+
+.post > h2> .post-title {
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  align-self: center;
+}
+
 .post-preview > a {
   color: #212529;
 }

@@ -10,9 +10,6 @@
 
       <div class="post-preview">
         <a href="{{route('blog.show', $post->id)}}">
-          <h2 class="post-title">
-            {{$post->title}}
-          </h2>
           <h3 class="post-subtitle">
             {{$post->excerpt}}
           </h3>
