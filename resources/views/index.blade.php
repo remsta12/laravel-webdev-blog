@@ -9,9 +9,9 @@
       @foreach($posts as $post)
 
       <div class="post-preview">
-        <a href="{{route('blog.show', $post->id)}}">
+        <a href="{{route('blog.show', $post->slug)}}">
           <h3 class="post-subtitle">
-            {{$post->excerpt}}
+            {!! $post->excerpt_html !!}
           </h3>
         </a>
         <p class="post-meta">Posted by

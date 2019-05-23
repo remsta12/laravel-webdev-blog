@@ -20,3 +20,7 @@ Route::get('/blog/{post}', [
   'uses' => 'BlogController@show',
   'as' => 'blog.show'
 ]);
+
+Route::get('/admin/main'[
+    'uses' => 'AdminController@index'
+]);

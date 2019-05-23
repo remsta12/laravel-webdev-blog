@@ -11,7 +11,7 @@
             {{$post->title}}
           </h2>
           <p class="post-content">
-            {{$post->body}}
+            {!! $post->body_html !!}
           </p>
         <p class="post-meta">Posted by
           <a href="#">{{$post->author->name}}
