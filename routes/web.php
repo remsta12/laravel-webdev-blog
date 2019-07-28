@@ -21,6 +21,28 @@ Route::get('/blog/{post}', [
   'as' => 'blog.show'
 ]);
 
-Route::get('/admin/main'[
-    'uses' => 'AdminController@index'
+Route::get('/admin/main', [
+    'uses' => 'AdminController@index',
+    'as' => 'admin'
 ]);
+
+Route::get('/admin/users', [
+    'uses' => 'AdminController@user',
+    'as' => 'admin.user'
+]);
+
+//--Edit a post record on DB--//
+Route::put('/admin/edit/post/{id}', [
+  'uses' => 'AdminController@editPostRecord',
+  'as' => 'admin.editpost'
+]);
+
+//--Edit a post record on DB--//
+Route::put('/admin/edit/user/{id}', [
+  'uses' => 'AdminController@editUserRecord',
+  'as' => 'admin.edituser'
+]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

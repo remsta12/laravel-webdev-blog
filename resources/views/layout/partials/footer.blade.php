@@ -28,7 +28,7 @@
             </a>
           </li>
         </ul>
-        <p class="copyright text-muted">Copyright &copy; Remy 2019</p>
+        <p class="copyright text-muted">Copyright &copy; <a href="{{route('admin')}}">Remy 2019</a> </p>
       </div>
     </div>
   </div>

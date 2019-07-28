@@ -9,7 +9,7 @@
 
 @include('dashlayout.partials.dashnav')
 @include('dashlayout.partials.dashheader')
-@yield('content')
+@yield('dashcontent')
 @include('dashlayout.partials.dashfooter')
 @include('dashlayout.partials.dashfooter-scripts')
 
