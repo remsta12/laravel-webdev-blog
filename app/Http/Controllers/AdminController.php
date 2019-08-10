@@ -43,27 +43,36 @@ class AdminController extends Controller
     **/
 
     /**
-    * Pushes new data to post (or any?) table
-    *
-    *
-    *public function add()
-    *{
-    *  $ posts = DB::table('posts') -> insertGetId(
-    *    ['']
-    *    )
-    *}
+     *Pushes new data to post table
     **/
+
+    public function addPostRecord(Request $request)
+    {
+      $post = new Post;
+      $post->name = $request->get('postForm-name');
+      $post->slug = $request->get('postForm-slug');
+      $post->title = $request->get('postForm-title');
+      $post->excerpt = $request->get('postForm-excerpt');
+      $post->body = $request->get('postForm-body');
+      $post->image = $request->get('postForm-image');
+      $post->save();
+      return redirect()->action('AdminController@index')->with('success', 'Data Updated');
+
+    }
+
+
+
     public function editPostRecord(Request $request, $id){
         /**
-          *HOLY FUCKING SHIT I DID DON'T TOUCH THIS SHIT REMY
-          * OK now we just have to make it so it uses the placeholder as input if nothing else entered
+          * Takes values located in respective form input boxes then saves to DB
         */
         $post = Post::find($id);
-        $post->slug = $request->get('editForm-slug');
-        $post->title = $request->get('editForm-title');
-        $post->excerpt = $request->get('editForm-excerpt');
-        $post->body = $request->get('editForm-body');
-        $post->image = $request->get('editForm-image');
+        $post->name = $request->get('postForm-name');
+        $post->slug = $request->get('postForm-slug');
+        $post->title = $request->get('postForm-title');
+        $post->excerpt = $request->get('postForm-excerpt');
+        $post->body = $request->get('postForm-body');
+        $post->image = $request->get('postForm-image');
         $post->save();
         return redirect()->action('AdminController@index')->with('success', 'Data Updated');
 
@@ -75,15 +84,13 @@ class AdminController extends Controller
         /**
         */
         $user = User::find($id);
-        $user->name = $request->get('editForm-username');
-        $user->email = $request->get('editForm-email');
-        $user->password = $request->get('editForm-pass');
-        $user->remember_token = $request->get('editForm-remtoken');
+        $user->name = $request->get('userForm-username');
+        $user->email = $request->get('userForm-email');
+        $user->password = $request->get('userForm-pass');
+        $user->remember_token = $request->get('userForm-remtoken');
         $user->save();
         return redirect()->action('AdminController@user')->with('success', 'Data Updated');
 
-        //-return Response::json($post);
-        //-return redirect('/admin/main')->back()->with('message', 'IT WORKS!');
     }
 
 

@@ -70,6 +70,11 @@ body {
   background-color: #fff;
 }
 
+#newPostButton {
+  align-self: : center;
+}
+
+
 [tabindex="-1"]:focus {
   outline: 0 !important;
 }

@@ -28,4 +28,6 @@ class Post extends Model
     public function getExcerptHtmlAttribute($value){
       return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;
     }
+
+    
 }

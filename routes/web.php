@@ -37,7 +37,13 @@ Route::put('/admin/edit/post/{id}', [
   'as' => 'admin.editpost'
 ]);
 
-//--Edit a post record on DB--//
+//--Add a post record on DB--//
+Route::put('/admin/add/post/{id}', [
+  'uses' => 'AdminController@addPostRecord',
+  'as' => 'admin.addpost'
+]);
+
+//--Edit a user record on DB--//
 Route::put('/admin/edit/user/{id}', [
   'uses' => 'AdminController@editUserRecord',
   'as' => 'admin.edituser'

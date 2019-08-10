@@ -16,6 +16,8 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{ URL::asset('js/sb-admin.min.js') }}"></script>
+<script src="{{ URL::asset('js/main.js') }}"></script>
+
 
 <!-- Demo scripts for this page-->
 <script src="{{ URL::asset('js/demo/datatables-demo.js')}}"></script>

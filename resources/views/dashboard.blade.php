@@ -57,7 +57,7 @@
     </ol>
 
   <div class="container-fluid">
-    BUTTON OF SOME SORTS TO ADD NEW RECORD
+    <button id="newPostButton" type="button" class="btn btn-info" data-toggle="modal" data-whichform="Add New Post" data-target="#postModalForm">Make new post</button>
   </div>
 
 <div id="record-editor" class="table-responsive">
@@ -77,7 +77,7 @@
       <th>Edit</th>
       <th>Remove</th>
     </tr>
-    @foreach($posts as $id=>$post)
+  @foreach($posts as $id=>$post)
 
     <tr>
       <td>{{$id + 1}}</td>
@@ -90,13 +90,13 @@
       <td>{{$post->image}}</td>
       <td>{{$post->created_at}}</td>
       <td>{{$post->updated_at}}</td>
-      <td><a data-js="btn-edit"><button id="{{$post->id}}" type="button" class="btn btn-warning" data-toggle="modal" data-target='#editModalForm{{$post->id}}'>Edit</button></a></td>
+      <td><a data-js="btn-edit"><button id="{{$post->id}}" type="button" class="btn btn-warning" data-toggle="modal" data-whichform="Edit Current Post" data-target='#postModalForm{{$post->id}}'>Edit</button></a></td>
       <td><a data-js="btn-remove"><button id="{{$post->id}}" type="button" class="btn btn-danger" data-toggle="modal" data-target='#deleteModalForm'>Delete</span></a></td>
     </tr>
 
 
-    <!-- The Modal  (MAY WANT TO PUJT INTO SEPERATE MODULE FILE)-->
-    <div class="modal fade" id="editModalForm{{$post->id}}">
+    <!-- The edit Modal  (MAY WANT TO PUT INTO SEPERATE MODULE FILE)-->
+    <div class="modal fade" id="postModalForm{{$post->id}}">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -107,13 +107,13 @@
           </div>
 
           <!-- Modal body -->
-          <form method="post" action="{{route('admin.editpost', $post->id)}}">
+          <form id="postForm" method="post" action="">
           {{csrf_field()}}
           {{method_field('PUT')}}
           <div class="modal-body mx-3">
            <div class="md-form mb-5">
              <label data-error="wrong" data-success="right" for="orangeForm-name">Name</label>
-             <select name="editForm-name" class="form-control validate" value="{{$post->name}}">
+             <select name="postForm-name" class="form-control validate" value="{{$post->name}}">
                @foreach($posts as $id => $post)
                 <option value="{{$id}}">{{$post->name}}</option>
                 @endforeach
@@ -121,33 +121,33 @@
            </div>
            <div class="md-form mb-5">
              <label data-error="wrong" data-success="right" for="orangeForm-email">HTML Slug</label>
-             <input type="text" name="editForm-slug" class="form-control validate" value="{{$post->slug}}">
+             <input type="text" name="postForm-slug" class="form-control validate" value="{{$post->slug}}">
            </div>
 
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Post title</label>
-             <input type="text" name="editForm-title" class="form-control validate" value="{{$post->title}}">
+             <input type="text" name="postForm-title" class="form-control validate" value="{{$post->title}}">
            </div>
 
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Post excerpt</label>
-             <input type="text" name="editForm-excerpt" class="form-control validate" value="{{$post->excerpt}}">
+             <input type="text" name="postForm-excerpt" class="form-control validate" value="{{$post->excerpt}}">
            </div>
 
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Post body</label>
-             <input type="text" name="editForm-body" class="form-control validate" value="{{$post->body}}">
+             <input type="text" name="postForm-body" class="form-control validate" value="{{$post->body}}">
            </div>
 
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Post image</label>
-             <input type="text" name="editForm-image" class="form-control validate" value="{{$post->image}}">
+             <input type="text" name="postForm-image" class="form-control validate" value="{{$post->image}}">
            </div>
 
          </div>
          <div class="modal-footer d-flex justify-content-center">
-           <input type="hidden" name="editForm_id" name="post_id" value="{{$post->id}}">
-           <input type="hidden" id="editForm_updatedAt" name="updated_time" value="0">
+           <input type="hidden" name="postForm_id" name="post_id" value="{{$post->id}}">
+           <input type="hidden" id="postForm_updatedAt" name="updated_time" value="0">
            <button id="confirmBtn" class="btn btn-deep-orange" type="submit">
 Confirm Edit</button>
         </form>

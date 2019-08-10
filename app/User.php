@@ -37,6 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+    * Encrypt the passwords
+    **/
+    public function setPasswordAttribute($value){
+      $this->attributes['password'] = bcrypt($value); 
+    }
+
     public function posts(){
       return $this->hasMany(Post::class);
     }
