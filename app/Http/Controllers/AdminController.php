@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Admin;
 use App\Post;
 use App\User;
@@ -33,34 +34,25 @@ class AdminController extends Controller
       return view("userdash")->with("users", $users);
     }
 
-
-    /**
-    * HASH OUT PARTICULARS: when updating an entry in the DB use the post title as reference to what must be changed
-    * with this (as we will soon set it to unique), we can accurately change records
-    *[ABOVE REDACTED AS HAVE NOW CHECKED MY CODE]
-    * To grab data to enter, use params so data entry from forms in dashboard is passed when method invoked
-    *
-    **/
-
     /**
      *Pushes new data to post table
     **/
-
     public function addPostRecord(Request $request)
     {
+      //update names of references to postForm_column when figure out way to merge the two modals
       $post = new Post;
-      $post->name = $request->get('postForm-name');
-      $post->slug = $request->get('postForm-slug');
-      $post->title = $request->get('postForm-title');
-      $post->excerpt = $request->get('postForm-excerpt');
-      $post->body = $request->get('postForm-body');
-      $post->image = $request->get('postForm-image');
+      $authorid = $request->get('postaddForm-name');
+      $post->author_id = $authorid;
+      $authorname = User::where('id', $authorid)->value('name');
+      $post->name = $authorname;
+      $post->slug = $request->get('postaddForm-slug');
+      $post->title = $request->get('postaddForm-title');
+      $post->excerpt = $request->get('postaddForm-excerpt');
+      $post->body = $request->get('postaddForm-body');
+      $post->image = $request->get('postaddForm-image');
       $post->save();
       return redirect()->action('AdminController@index')->with('success', 'Data Updated');
-
     }
-
-
 
     public function editPostRecord(Request $request, $id){
         /**
@@ -76,8 +68,29 @@ class AdminController extends Controller
         $post->save();
         return redirect()->action('AdminController@index')->with('success', 'Data Updated');
 
-        //-return Response::json($post);
-        //-return redirect('/admin/main')->back()->with('message', 'IT WORKS!');
+    }
+
+
+    public function deletePostRecord(Request $request, $id){
+      $postid = $request->get("postDeleteForm_id");
+      $post = Post::where('id', $postid)->delete();
+      return redirect()->action('AdminController@index')->with('success', 'Data Updated');
+    }
+
+
+    /**
+     *Pushes new data to user table
+    **/
+    public function addUserRecord(Request $request)
+    {
+      //update names of references to postForm_column when figure out way to merge the two modals
+      $user = new User;
+      $user->name = $request->get('useraddForm-username');
+      $user->email = $request->get('useraddForm-email');
+      $user->password = Hash::make($request->get('useraddForm-pass'));
+      $user->remember_token = $request->get('useraddForm-remtoken');
+      $user->save();
+      return redirect()->action('AdminController@user')->with('success', 'Data Updated');
     }
 
     public function editUserRecord(Request $request, $id){
@@ -86,11 +99,18 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->name = $request->get('userForm-username');
         $user->email = $request->get('userForm-email');
-        $user->password = $request->get('userForm-pass');
+        $user->password = Hash::make($request->get('userForm-pass'));
         $user->remember_token = $request->get('userForm-remtoken');
         $user->save();
         return redirect()->action('AdminController@user')->with('success', 'Data Updated');
 
+    }
+
+
+    public function deleteUserRecord(Request $request, $id){
+      $userid = $request->get("userDeleteForm_id");
+      $user = User::where('id', $userid)->delete();
+      return redirect()->action('AdminController@user')->with('success', 'Data Updated');
     }
 
 

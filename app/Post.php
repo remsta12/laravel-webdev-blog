@@ -10,7 +10,7 @@ class Post extends Model
 {
     # This and post funciton in User.php is how to call from related tables
     public function author(){
-      return $this->belongsTo(User::class);
+      return $this->belongsTo('App\User', 'author_id');
     }
 
     public function scopeLatestFirst($query){
@@ -29,5 +29,5 @@ class Post extends Model
       return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;
     }
 
-    
+
 }

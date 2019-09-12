@@ -57,7 +57,7 @@
     </ol>
 
   <div class="container-fluid">
-    <button id="newPostButton" type="button" class="btn btn-info" data-toggle="modal" data-whichform="Add New Post" data-target="#postModalForm">Make new post</button>
+    <button id="newPostButton" type="button" class="btn btn-info" data-toggle="modal" data-whichform="Add New Post" data-target="#postAddModalForm">Make new post</button>
   </div>
 
 <div id="record-editor" class="table-responsive">
@@ -80,7 +80,7 @@
   @foreach($posts as $id=>$post)
 
     <tr>
-      <td>{{$id + 1}}</td>
+      <td>{{$post->id + 1}}</td>
       <td>{{$post->author_id}}</td>
       <td>{{$post->name}}</td>
       <td>{{$post->slug}}</td>
@@ -90,13 +90,38 @@
       <td>{{$post->image}}</td>
       <td>{{$post->created_at}}</td>
       <td>{{$post->updated_at}}</td>
-      <td><a data-js="btn-edit"><button id="{{$post->id}}" type="button" class="btn btn-warning" data-toggle="modal" data-whichform="Edit Current Post" data-target='#postModalForm{{$post->id}}'>Edit</button></a></td>
-      <td><a data-js="btn-remove"><button id="{{$post->id}}" type="button" class="btn btn-danger" data-toggle="modal" data-target='#deleteModalForm'>Delete</span></a></td>
+      <td><a data-js="btn-edit"><button id="{{$post->id}}" value=<?php echo $id;?> type="button" class="btn btn-warning" data-toggle="modal" data-whichform="Edit Current Post" data-target='#postEditModalForm<?php echo $id;?>'>Edit</button></a></td>
+      <td><a data-js="btn-remove"><button id="{{$post->id}}" type="button" class="btn btn-danger" data-toggle="modal" data-target='#deleteModalForm{{$post->id}}'>Delete</span></a></td>
     </tr>
 
 
+    <!--Delete Modal -->
+<div class="modal fade" id="deleteModalForm{{$post->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete this post?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="postDeleteForm" method="post" action="{{route('admin.deletepost', $post->id)}}">
+        {{csrf_field()}}
+        {{method_field('DELETE')}}
+      <div class="modal-body">
+        The contents of the this post record cannot be accessed again after deletion. Would you still like to delete?
+        <input type="hidden" name="postDeleteForm_id" value="{{$post->id}}">
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-deep-orange">Yes</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
     <!-- The edit Modal  (MAY WANT TO PUT INTO SEPERATE MODULE FILE)-->
-    <div class="modal fade" id="postModalForm{{$post->id}}">
+    <div class="modal fade" id="postEditModalForm<?php echo $id;?>">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -107,21 +132,21 @@
           </div>
 
           <!-- Modal body -->
-          <form id="postForm" method="post" action="">
+          <form id="postForm" method="post" action="{{route('admin.editpost', $post->id)}}">
           {{csrf_field()}}
           {{method_field('PUT')}}
           <div class="modal-body mx-3">
            <div class="md-form mb-5">
              <label data-error="wrong" data-success="right" for="orangeForm-name">Name</label>
-             <select name="postForm-name" class="form-control validate" value="{{$post->name}}">
-               @foreach($posts as $id => $post)
-                <option value="{{$id}}">{{$post->name}}</option>
+             <select name="postForm-name" class="form-control validate">
+               @foreach($posts as $id)
+                <option value="{{$id}}">{{$id->name}}</option>
                 @endforeach
               </select>
            </div>
            <div class="md-form mb-5">
              <label data-error="wrong" data-success="right" for="orangeForm-email">HTML Slug</label>
-             <input type="text" name="postForm-slug" class="form-control validate" value="{{$post->slug}}">
+             <input type="text" name="postForm-slug" class="form-control validate" value="{{$post->slug}}"></input>
            </div>
 
            <div class="md-form mb-4">
@@ -146,8 +171,71 @@
 
          </div>
          <div class="modal-footer d-flex justify-content-center">
-           <input type="hidden" name="postForm_id" name="post_id" value="{{$post->id}}">
-           <input type="hidden" id="postForm_updatedAt" name="updated_time" value="0">
+           <input type="hidden" name="postForm_id" value="{{$post->id}}">
+           <button id="confirmBtn" class="btn btn-deep-orange" type="submit">
+Confirm Edit</button>
+        </form>
+         </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- The add Modal  (MAY WANT TO PUT INTO SEPERATE MODULE FILE)-->
+    <div class="modal fade" id="postAddModalForm">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Add New Post</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <form id="postaddForm" method="post" action="{{route('admin.addpost', $post->id)}}">
+          {{csrf_field()}}
+          {{method_field('PUT')}}
+          <div class="modal-body mx-3">
+           <div class="md-form mb-5">
+             <label data-error="wrong" data-success="right" for="orangeForm-name">Name</label>
+             <select name="postaddForm-name" class="form-control validate">
+               @foreach($posts as $id => $post)
+                <option value="{{$id}}">{{$post->name}}</option>
+                <!-- -create some jquery so that when name is selected, corresponding author_id is also sent through in another input box (hidden)
+                      surely a laravel way to do this-->
+                @endforeach
+              </select>
+           </div>
+           <div class="md-form mb-5">
+             <label data-error="wrong" data-success="right" for="orangeForm-email">HTML Slug</label>
+             <input type="text" name="postaddForm-slug" class="form-control validate">
+           </div>
+
+           <div class="md-form mb-4">
+             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post title</label>
+             <input type="text" name="postaddForm-title" class="form-control validate">
+           </div>
+
+           <div class="md-form mb-4">
+             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post excerpt</label>
+             <input type="text" name="postaddForm-excerpt" class="form-control validate">
+           </div>
+
+           <div class="md-form mb-4">
+             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post body</label>
+             <input type="text" name="postaddForm-body" class="form-control validate">
+           </div>
+
+           <div class="md-form mb-4">
+             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post image</label>
+             <input type="text" name="postaddForm-image" class="form-control validate">
+           </div>
+
+         </div>
+         <div class="modal-footer d-flex justify-content-center">
+           <input type="hidden" name="postaddForm_authorid" name="postAuthor_id" value="{{$post->author_id}}">
            <button id="confirmBtn" class="btn btn-deep-orange" type="submit">
 Confirm Edit</button>
         </form>

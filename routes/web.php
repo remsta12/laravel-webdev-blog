@@ -43,11 +43,30 @@ Route::put('/admin/add/post/{id}', [
   'as' => 'admin.addpost'
 ]);
 
+//--Delete a post record on DB--//
+Route::delete('/admin/delete/post/{id}', [
+  'uses' => 'AdminController@deletePostRecord',
+  'as' => 'admin.deletepost'
+]);
+
 //--Edit a user record on DB--//
 Route::put('/admin/edit/user/{id}', [
   'uses' => 'AdminController@editUserRecord',
   'as' => 'admin.edituser'
 ]);
+
+//--Add a user record on DB--//
+Route::put('/admin/add/user/{id}', [
+  'uses' => 'AdminController@addUserRecord',
+  'as' => 'admin.adduser'
+]);
+
+//--Delete a post record on DB--//
+Route::delete('/admin/delete/user/{id}', [
+  'uses' => 'AdminController@deleteUserRecord',
+  'as' => 'admin.deleteuser'
+]);
+
 
 Auth::routes();
 

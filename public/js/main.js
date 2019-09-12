@@ -1,3 +1,4 @@
+/*
 $('#postModalForm').on('show.bs.modal', function(event) {
 	var data = $(event.relatedTarget).data('whichform'); //gets add/edit changes header text f.e
 	var modal = $(this);
@@ -13,3 +14,4 @@ $('#postModalForm').on('show.bs.modal', function(event) {
     modal.find('.modal-title').text(data);
   }
 })
+*/

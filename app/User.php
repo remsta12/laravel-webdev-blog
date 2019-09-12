@@ -41,11 +41,11 @@ class User extends Authenticatable
     * Encrypt the passwords
     **/
     public function setPasswordAttribute($value){
-      $this->attributes['password'] = bcrypt($value); 
+      $this->attributes['password'] = bcrypt($value);
     }
 
     public function posts(){
-      return $this->hasMany(Post::class);
+      return $this->hasMany('App\Post', 'author_id');
     }
 
       /*public function roles(){

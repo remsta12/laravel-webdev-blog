@@ -58,8 +58,7 @@
    </ol>
 
 <div class="container-fluid">
-  BUTTON OF SOME SORTS TO ADD NEW RECORD
-</div>
+  <button id="newUserButton" type="button" class="btn btn-info" data-toggle="modal" data-whichform="Add New User" data-target="#addUserModalForm">Make new user account</button></div>
 
 <div id="record-editor" class="table-responsive">
   @if (count($users) > 0)
@@ -87,13 +86,38 @@
       <td>{{$user->remember_token}}</td>
       <td>{{$user->created_at}}</td>
       <td>{{$user->updated_at}}</td>
-      <td><a data-js="btn-edit"><button id="{{$user->id}}" type="button" class="btn btn-warning" data-toggle="modal" data-target='#editModalForm{{$user->id}}'>Edit</button></a></td>
-      <td><a data-js="btn-remove"><button id="{{$user->id}}" type="button" class="btn btn-danger" data-toggle="modal" data-target='#deleteModalForm'>Delete</span></a></td>
+      <td><a data-js="btn-edit"><button id="{{$user->id}}" type="button" class="btn btn-warning" data-toggle="modal" data-target='#edituserModalForm{{$user->id}}'>Edit</button></a></td>
+      <td><a data-js="btn-remove"><button id="{{$user->id}}" type="button" class="btn btn-danger" data-toggle="modal" data-target='#deleteUserModalForm{{$user->id}}'>Delete</span></a></td>
     </tr>
 
+        <!--Delete Modal -->
+    <div class="modal fade" id="deleteUserModalForm{{$user->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete this user?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="userDeleteForm" method="post" action="{{route('admin.deleteuser', $user->id)}}">
+            {{csrf_field()}}
+            {{method_field('DELETE')}}
+          <div class="modal-body">
+            This user record will now be permanently removed from the database. Would you still like to delete?
+            <input type="hidden" name="userDeleteForm_id" value="{{$user->id}}">
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-deep-orange">Yes</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- The Modal  (MAY WANT TO PUJT INTO SEPERATE MODULE FILE)-->
-    <div class="modal fade" id="editModalForm{{$user->id}}">
+
+    <!-- The Edit Modal  (MAY WANT TO PUJT INTO SEPERATE MODULE FILE)-->
+    <div class="modal fade" id="edituserModalForm{{$user->id}}">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -104,7 +128,7 @@
           </div>
 
           <!-- Modal body -->
-          <form method="post" action="{{route('admin.edituser', $user->id)}}">
+          <form id="userForm" method="post" action="{{route('admin.edituser', $user->id)}}">
           {{csrf_field()}}
           {{method_field('PUT')}}
           <div class="modal-body mx-3">
@@ -118,7 +142,7 @@
            </div>
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Password</label>
-             <input type="text" name="editForm-pass" class="form-control validate" value="{{$user->password}}">
+             <input type="text" name="editForm-pass" class="form-control validate">
            </div>
 
            <div class="md-form mb-4">
@@ -131,6 +155,53 @@
            <input type="hidden" id="editForm_updatedAt" name="updated_time" value="0">
            <button id="confirmBtn" class="btn btn-deep-orange" type="submit">
   Confirm Edit</button>
+        </form>
+         </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- The Modal  (MAY WANT TO PUJT INTO SEPERATE MODULE FILE)-->
+    <div class="modal fade" id="addUserModalForm">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Add New User</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <form id="addUserForm" method="post" action="{{route('admin.adduser', $user->id)}}">
+          {{csrf_field()}}
+          {{method_field('PUT')}}
+          <div class="modal-body mx-3">
+           <div class="md-form mb-5">
+             <label data-error="wrong" data-success="right" for="orangeForm-name">Name</label>
+             <input type="text" name="useraddForm-username" class="form-control validate">
+           </div>
+           <div class="md-form mb-5">
+             <label data-error="wrong" data-success="right" for="orangeForm-email">Email</label>
+             <input type="text" name="useraddForm-email" class="form-control validate">
+           </div>
+           <div class="md-form mb-4">
+             <label data-error="wrong" data-success="right" for="orangeForm-pass">Password</label>
+             <input type="text" name="useraddForm-pass" class="form-control validate">
+           </div>
+
+           <div class="md-form mb-4">
+             <label data-error="wrong" data-success="right" for="orangeForm-pass">Remember Token</label>
+             <input type="text" name="useraddForm-remtoken" class="form-control validate">
+           </div>
+         </div>
+         <div class="modal-footer d-flex justify-content-center">
+           <input type="hidden" name="adduserForm_id" name="user_id" value="{{$user->id}}">
+           <input type="hidden" id="adduserForm_updatedAt" name="updated_time" value="0">
+           <button id="confirmBtn" class="btn btn-deep-orange" type="submit">
+  Confirm User</button>
         </form>
          </div>
 
