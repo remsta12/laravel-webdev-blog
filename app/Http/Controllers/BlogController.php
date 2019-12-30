@@ -18,4 +18,17 @@ class BlogController extends Controller
     public function show(Post $post){
       return view('show', compact('post'));
     }
+
+    public function randompost(){
+      $post = Post::inRandomOrder()->first();
+      return redirect()->route('blog.show', [$post->slug]);
+    }
+
+    public function contact(){
+      return view("contact");
+    }
+
+    public function about(){
+      return view("about");
+    }
 }

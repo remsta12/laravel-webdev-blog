@@ -21,6 +21,21 @@ Route::get('/blog/{post}', [
   'as' => 'blog.show'
 ]);
 
+Route::get('/about', [
+  'uses' => 'BlogController@about',
+  'as' => 'blog.about'
+]);
+
+Route::get('/contact', [
+  'uses' => 'BlogController@contact',
+  'as' => 'blog.contact'
+]);
+
+Route::get('randompost', [
+  'uses' => 'BlogController@randompost',
+  'as' => 'blog.random'
+]);
+
 Route::get('/admin/main', [
     'uses' => 'AdminController@index',
     'as' => 'admin'
