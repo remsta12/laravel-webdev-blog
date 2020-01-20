@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->bigInteger('author_id')->unsigned();
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('title');
             $table->text('excerpt');
             $table->text('body');
             $table->string('image')->nullable();

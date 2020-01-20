@@ -15,7 +15,7 @@
 <script src="{{ URL::asset('js/datatables/dataTables.bootstrap4.js') }}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="{{ URL::asset('js/sb-admin.min.js') }}"></script>
+<script src="{{ URL::asset('js/sb-admin.js') }}"></script>
 <script src="{{ URL::asset('js/main.js') }}"></script>
 
 

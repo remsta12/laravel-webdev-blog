@@ -24,10 +24,6 @@ class BlogController extends Controller
       return redirect()->route('blog.show', [$post->slug]);
     }
 
-    public function contact(){
-      return view("contact");
-    }
-
     public function about(){
       return view("about");
     }

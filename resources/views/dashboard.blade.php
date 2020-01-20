@@ -13,7 +13,7 @@
         <h6 class="dropdown-header">Database Tables:</h6>
         <a class="dropdown-item" href="{{route('admin')}}">Posts</a>
         <a class="dropdown-item" href="{{route('admin.user')}}">Users</a>
-
+        <a class="dropdown-item" href="{{route('admin.role')}}">Roles</a>
       </div>
     </li>
     <li class="nav-item dropdown">
@@ -31,16 +31,6 @@
         <a class="dropdown-item" href="404.html">404 Page</a>
         <a class="dropdown-item" href="blank.html">Blank Page</a>
       </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="charts.html">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Tables</span></a>
     </li>
   </ul>
 
@@ -80,7 +70,7 @@
   @foreach($posts as $id=>$post)
 
     <tr>
-      <td>{{$post->id + 1}}</td>
+      <td>{{$post->id}}</td>
       <td>{{$post->author_id}}</td>
       <td>{{$post->name}}</td>
       <td>{{$post->slug}}</td>
@@ -137,35 +127,35 @@
           {{method_field('PUT')}}
           <div class="modal-body mx-3">
            <div class="md-form mb-5">
-             <label data-error="wrong" data-success="right" for="orangeForm-name">Name</label>
+             <label data-error="wrong" data-success="right">Name</label>
              <select name="postForm-name" class="form-control validate">
-               @foreach($posts as $id)
-                <option value="{{$id}}">{{$id->name}}</option>
+               @foreach($users as $user)
+                <option value="{{$user->name}}">{{$user->name}}</option>
                 @endforeach
               </select>
            </div>
            <div class="md-form mb-5">
-             <label data-error="wrong" data-success="right" for="orangeForm-email">HTML Slug</label>
+             <label data-error="wrong" data-success="right">HTML Slug</label>
              <input type="text" name="postForm-slug" class="form-control validate" value="{{$post->slug}}"></input>
            </div>
 
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post title</label>
+             <label data-error="wrong" data-success="right">Post title</label>
              <input type="text" name="postForm-title" class="form-control validate" value="{{$post->title}}">
            </div>
 
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post excerpt</label>
+             <label data-error="wrong" data-success="right">Post excerpt</label>
              <input type="text" name="postForm-excerpt" class="form-control validate" value="{{$post->excerpt}}">
            </div>
 
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post body</label>
+             <label data-error="wrong" data-success="right">Post body</label>
              <input type="text" name="postForm-body" class="form-control validate" value="{{$post->body}}">
            </div>
 
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right" for="orangeForm-pass">Post image</label>
+             <label data-error="wrong" data-success="right">Post image</label>
              <input type="text" name="postForm-image" class="form-control validate" value="{{$post->image}}">
            </div>
 
@@ -201,12 +191,11 @@ Confirm Edit</button>
            <div class="md-form mb-5">
              <label data-error="wrong" data-success="right" for="orangeForm-name">Name</label>
              <select name="postaddForm-name" class="form-control validate">
-               @foreach($posts as $id => $post)
-                <option value="{{$id}}">{{$post->name}}</option>
-                <!-- -create some jquery so that when name is selected, corresponding author_id is also sent through in another input box (hidden)
-                      surely a laravel way to do this-->
+               @foreach($users as $user)
+                <option value="{{$user->name}}">{{$user->name}}</option>
                 @endforeach
               </select>
+              <input type="hidden" name="postaddForm_authorid" name="postAuthor_id" value="{{$user->id}}">
            </div>
            <div class="md-form mb-5">
              <label data-error="wrong" data-success="right" for="orangeForm-email">HTML Slug</label>
@@ -235,7 +224,6 @@ Confirm Edit</button>
 
          </div>
          <div class="modal-footer d-flex justify-content-center">
-           <input type="hidden" name="postaddForm_authorid" name="postAuthor_id" value="{{$post->author_id}}">
            <button id="confirmBtn" class="btn btn-deep-orange" type="submit">
 Confirm Edit</button>
         </form>

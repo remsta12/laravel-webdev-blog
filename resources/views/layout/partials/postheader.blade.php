@@ -1,8 +1,4 @@
-@if(!empty($post->image))
-  <header class="masthead" style="background-image: url('{{$post->image}}')">
-@else
-  <header class="masthead" style="background-image: url('./../../../img/home-bg.jpg')">
-@endif
+<header class="masthead" style="background-image: url($posts->)">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">

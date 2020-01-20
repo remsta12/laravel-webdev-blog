@@ -1,4 +1,4 @@
-<?php
+?php
 
 namespace App\Http\Controllers\Auth;
 
@@ -63,10 +63,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
+        $user
+              ->roles()
+              ->attach(Role::where('name', 'regular')->first());
+
+        return $user;
     }
 }

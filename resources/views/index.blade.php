@@ -7,7 +7,6 @@
     <div class="col-lg-8 col-md-10 mx-auto">
 
       @foreach($posts as $post)
-
       <div class="post-preview">
         <a href="{{route('blog.show', $post->slug)}}">
           <h3 class="post-subtitle">

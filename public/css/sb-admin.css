@@ -189,8 +189,6 @@ a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
 a:not([href]):not([tabindex]):focus {
   outline: 0;
 }
-
-pre,
 code,
 kbd,
 samp {
@@ -10918,4 +10916,8 @@ body.sidebar-toggled footer.sticky-footer {
   body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
+}
+
+#passCheck{
+  margin-left: 15px;
 }

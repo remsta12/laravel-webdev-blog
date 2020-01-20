@@ -27,8 +27,13 @@ Route::get('/about', [
 ]);
 
 Route::get('/contact', [
-  'uses' => 'BlogController@contact',
+  'uses' => 'ContactController@form',
   'as' => 'blog.contact'
+]);
+
+Route::post('contactmsgsent', [
+  'uses' => 'ContactController@store',
+  'as' => 'contact.msg'
 ]);
 
 Route::get('randompost', [
@@ -44,6 +49,11 @@ Route::get('/admin/main', [
 Route::get('/admin/users', [
     'uses' => 'AdminController@user',
     'as' => 'admin.user'
+]);
+
+Route::get('/admin/roles', [
+    'uses' => 'AdminController@role',
+    'as' => 'admin.role'
 ]);
 
 //--Edit a post record on DB--//
@@ -82,6 +92,10 @@ Route::delete('/admin/delete/user/{id}', [
   'as' => 'admin.deleteuser'
 ]);
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

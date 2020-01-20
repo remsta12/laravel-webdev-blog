@@ -164,6 +164,27 @@ img::-moz-selection {
   }
 }
 
+#contact-form > label {
+  text-color: #212529;
+  font-weight: bold;
+}
+
+.contact-address{
+
+}
+
+#contact-details{
+  background-color: #bbc2c9;
+  border-bottom: 5px solid #75797D;
+  opacity: 0.75;
+  justify-content: center;
+
+}
+
+#contact-form{
+  padding-top: 1em;
+}
+
 header.masthead {
   margin-bottom: 50px;
   background: no-repeat center center;

@@ -18,6 +18,15 @@
     }
   });
 
+  $('#passCheck').change(function() {
+      if ($('#passCheck').is(':checked') == true) {
+        $('[name="editForm-pass"]').prop("disabled", false);
+      } else {
+        $('[name="editForm-pass"]').prop("disabled", true);
+        }
+  });
+
+
   // Scroll to top button appear
   $(document).on('scroll', function() {
     var scrollDistance = $(this).scrollTop();

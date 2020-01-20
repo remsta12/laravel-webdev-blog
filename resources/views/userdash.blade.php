@@ -14,6 +14,7 @@
        <h6 class="dropdown-header">Database Tables:</h6>
        <a class="dropdown-item" href="{{route('admin')}}">Posts</a>
        <a class="dropdown-item" href="{{route('admin.user')}}">Users</a>
+       <a class="dropdown-item" href="{{route('admin.role')}}">Roles</a>
 
      </div>
    </li>
@@ -33,16 +34,6 @@
        <a class="dropdown-item" href="blank.html">Blank Page</a>
      </div>
    </li>
-   <li class="nav-item">
-     <a class="nav-link" href="charts.html">
-       <i class="fas fa-fw fa-chart-area"></i>
-       <span>Charts</span></a>
-   </li>
-   <li class="nav-item">
-     <a class="nav-link" href="tables.html">
-       <i class="fas fa-fw fa-table"></i>
-       <span>Tables</span></a>
-   </li>
  </ul>
 
 
@@ -54,7 +45,7 @@
      <li class="breadcrumb-item">
        <a href="#">Dashboard</a>
      </li>
-     <li class="breadcrumb-item active">Overview</li>
+     <li class="breadcrumb-item active">Users</li>
    </ol>
 
 <div class="container-fluid">
@@ -142,14 +133,22 @@
            </div>
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Password</label>
-             <input type="text" name="editForm-pass" class="form-control validate">
+             <input type="text" name="editForm-pass" class="form-control validate" id="passInput" disabled="disabled">
+             <label for="passCheck" class="form-check-label">Do you want to change the password? <input class="form-check-input" type="checkbox" id="passCheck"></label>
            </div>
-
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right" for="orangeForm-pass">Remember Token</label>
+             <label data-error="wrong" data-success="right" for="orangeForm-remtoken">Remember Token</label>
              <input type="text" name="editForm-remtoken" class="form-control validate" value="{{$user->remember_token}}">
            </div>
+           <div class="md-form mb-5">
+             <label data-error="wrong" data-success="right">User Role</label>
+             <select name="editForm-role" class="form-control validate">
+               <option value="Regular">Regular User</option>
+               <option value="Admin">Admin User</option>
+             </select>
+           </div>
          </div>
+
          <div class="modal-footer d-flex justify-content-center">
            <input type="hidden" name="editForm_id" name="user_id" value="{{$user->id}}">
            <input type="hidden" id="editForm_updatedAt" name="updated_time" value="0">
@@ -157,7 +156,6 @@
   Confirm Edit</button>
         </form>
          </div>
-
         </div>
       </div>
     </div>
@@ -180,21 +178,27 @@
           {{method_field('PUT')}}
           <div class="modal-body mx-3">
            <div class="md-form mb-5">
-             <label data-error="wrong" data-success="right" for="orangeForm-name">Name</label>
+             <label data-error="wrong" data-success="right">Name</label>
              <input type="text" name="useraddForm-username" class="form-control validate">
            </div>
            <div class="md-form mb-5">
-             <label data-error="wrong" data-success="right" for="orangeForm-email">Email</label>
+             <label data-error="wrong" data-success="right">Email</label>
              <input type="text" name="useraddForm-email" class="form-control validate">
            </div>
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right" for="orangeForm-pass">Password</label>
+             <label data-error="wrong" data-success="right">Password</label>
              <input type="text" name="useraddForm-pass" class="form-control validate">
            </div>
-
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right" for="orangeForm-pass">Remember Token</label>
+             <label data-error="wrong" data-success="right">Remember Token</label>
              <input type="text" name="useraddForm-remtoken" class="form-control validate">
+           </div>
+           <div class="md-form mb-4">
+             <label data-error="wrong" data-success="right">User Role</label>
+             <select name="useraddForm-role" class="form-control validate">
+               <option value="Regular">Regular User</option>
+               <option value="Admin">Admin User</option>
+             </select>
            </div>
          </div>
          <div class="modal-footer d-flex justify-content-center">
