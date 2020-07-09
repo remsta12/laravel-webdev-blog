@@ -39,7 +39,6 @@
 
 <div id="content-wrapper">
  <div class="container-fluid">
-
    <!-- Breadcrumbs-->
    <ol class="breadcrumb">
      <li class="breadcrumb-item">
@@ -73,7 +72,7 @@
       <td>{{$user->name}}</td>
       <td>{{$user->email}}</td>
       <td>{{$user->email_verified_at}}</td>
-      <td>{{$user->password}}</td>
+      <td class="overflow">{{$user->password}}</td>
       <td>{{$user->remember_token}}</td>
       <td>{{$user->created_at}}</td>
       <td>{{$user->updated_at}}</td>

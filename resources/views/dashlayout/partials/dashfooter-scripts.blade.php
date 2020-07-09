@@ -19,6 +19,13 @@
 <script src="{{ URL::asset('js/main.js') }}"></script>
 
 
-<!-- Demo scripts for this page-->
-<script src="{{ URL::asset('js/demo/datatables-demo.js')}}"></script>
-<script src="{{ URL::asset('js/demo/chart-area-demo.js')}}"></script>
+<!-- Tiny MCE -->
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/gykdfif7g4dvm99u92aek3akmd1dvie3cfekuqwj7gn4ewzs/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+tinymce.init({
+  selector: '[name$="-body"]',
+  menubar: false,
+
+});
+</script>

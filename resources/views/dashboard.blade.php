@@ -16,7 +16,7 @@
         <a class="dropdown-item" href="{{route('admin.role')}}">Roles</a>
       </div>
     </li>
-    <li class="nav-item dropdown">
+    <!--<li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-fw fa-folder"></i>
         <span>Pages</span>
@@ -31,19 +31,18 @@
         <a class="dropdown-item" href="404.html">404 Page</a>
         <a class="dropdown-item" href="blank.html">Blank Page</a>
       </div>
-    </li>
+    </li>-->
   </ul>
 
 
 <div id="content-wrapper">
   <div class="container-fluid">
-
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="#">Dashboard</a>
       </li>
-      <li class="breadcrumb-item active">Overview</li>
+      <li class="breadcrumb-item active">Posts</li>
     </ol>
 
   <div class="container-fluid">
@@ -76,14 +75,13 @@
       <td>{{$post->slug}}</td>
       <td>{{$post->title}}</td>
       <td>{{$post->excerpt}}</td>
-      <td>{{$post->body}}</td>
-      <td>{{$post->image}}</td>
+      <td><div class="table-cell">{{$post->body}}</div></td>
+      <td><div class="table-cell">{{$post->image}}</div></td>
       <td>{{$post->created_at}}</td>
       <td>{{$post->updated_at}}</td>
       <td><a data-js="btn-edit"><button id="{{$post->id}}" value=<?php echo $id;?> type="button" class="btn btn-warning" data-toggle="modal" data-whichform="Edit Current Post" data-target='#postEditModalForm<?php echo $id;?>'>Edit</button></a></td>
       <td><a data-js="btn-remove"><button id="{{$post->id}}" type="button" class="btn btn-danger" data-toggle="modal" data-target='#deleteModalForm{{$post->id}}'>Delete</span></a></td>
     </tr>
-
 
     <!--Delete Modal -->
 <div class="modal fade" id="deleteModalForm{{$post->id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -150,9 +148,13 @@
            </div>
 
            <div class="md-form mb-4">
-             <label data-error="wrong" data-success="right">Post body</label>
-             <input type="text" name="postForm-body" class="form-control validate" value="{{$post->body}}">
-           </div>
+            <div>
+         <label>Post Body</label>
+         <div class="form-group">
+            <input id="editor" type="textarea" name="postForm-body" class="form-control validate" value="{{$post->body}}">
+         </div>
+       </div>
+     </div>
 
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right">Post image</label>
@@ -170,6 +172,7 @@ Confirm Edit</button>
         </div>
       </div>
     </div>
+
 
 
     <!-- The add Modal  (MAY WANT TO PUT INTO SEPERATE MODULE FILE)-->
@@ -214,15 +217,13 @@ Confirm Edit</button>
 
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Post body</label>
-             <input type="text" name="postaddForm-body" class="form-control validate">
+             <input type="textarea" name="postaddForm-body" class="form-control validate">
            </div>
 
            <div class="md-form mb-4">
              <label data-error="wrong" data-success="right" for="orangeForm-pass">Post image</label>
              <input type="text" name="postaddForm-image" class="form-control validate">
            </div>
-
-         </div>
          <div class="modal-footer d-flex justify-content-center">
            <button id="confirmBtn" class="btn btn-deep-orange" type="submit">
 Confirm Edit</button>

@@ -14,3 +14,4 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ URL::asset('css/sb-admin.css') }}" rel="stylesheet">
+<!--TinyMCE just fucking work -->

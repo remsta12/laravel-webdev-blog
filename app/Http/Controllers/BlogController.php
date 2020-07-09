@@ -11,7 +11,7 @@ class BlogController extends Controller
     protected $limit = 2;
 
     public function index(){
-      $posts = Post::with('author')->latestFirst()->published()->paginate($this->limit);
+      $posts = Post::with('author')->latestFirst()->published()->simplePaginate($this->limit);
       return view("index", compact('posts'));
     }
 
@@ -26,5 +26,9 @@ class BlogController extends Controller
 
     public function about(){
       return view("about");
+    }
+
+    public function login(){
+      return view("auth/login");
     }
 }

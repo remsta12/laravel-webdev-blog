@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'remember_token',
     ];
 
     /**
@@ -56,7 +56,7 @@ class User extends Authenticatable
       * Are you authorised?
       * @param string|array $roles
     */
-    public function authoriseRoles($roles){ 
+    public function authoriseRoles($roles){
 
       if(is_array($roles)){
         return $this->hasAnyRole($roles) || abort(401, 'This action is unauthorised');

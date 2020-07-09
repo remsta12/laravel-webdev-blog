@@ -5,7 +5,7 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="about-heading">
           <h1>Contact me</h1>
-          <span class="subheading">PLEASE</span>
+          <span class="subheading">Any inquiries you may need can be done using the fake contact information below. Or you can email me with the form!</span>
         </div>
       </div>
     </div>

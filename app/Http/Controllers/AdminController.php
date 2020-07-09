@@ -52,13 +52,15 @@ class AdminController extends Controller
       //update names of references to postForm_column when figure out way to merge the two modals
       $post = new Post;
       $authorid = $request->get('postaddForm_authorid');
+      $postbody = $request->get('postaddForm-body');
+      $postbody = addslashes($postbody);
       $post->author_id = $authorid;
       $authorname = User::where('id', $authorid)->value('name');
       $post->name = $authorname;
       $post->slug = $request->get('postaddForm-slug');
       $post->title = $request->get('postaddForm-title');
       $post->excerpt = $request->get('postaddForm-excerpt');
-      $post->body = $request->get('postaddForm-body');
+      $post->body = $postbody;
       $post->image = $request->get('postaddForm-image');
       $post->save();
       return redirect()->action('AdminController@index')->with('success', 'Data Updated');
@@ -69,11 +71,13 @@ class AdminController extends Controller
           * Takes values located in respective form input boxes then saves to DB
         */
         $post = Post::find($id);
+        $postbody = $request->get('postForm-body');
+        $postbody =  addslashes($postbody);
         $post->name = $request->get('postForm-name');
         $post->slug = $request->get('postForm-slug');
         $post->title = $request->get('postForm-title');
         $post->excerpt = $request->get('postForm-excerpt');
-        $post->body = $request->get('postForm-body');
+        $post->body = $postbody;
         $post->image = $request->get('postForm-image');
         $post->save();
         return redirect()->action('AdminController@index')->with('success', 'Data Updated');

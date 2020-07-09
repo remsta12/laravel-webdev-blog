@@ -232,6 +232,14 @@ th {
   text-align: inherit;
 }
 
+  td.overflow{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 175px;
+    white-space: pre-wrap;
+    height: 150px;
+  }
+
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -1673,10 +1681,18 @@ pre code {
   width: 100%;
   margin-bottom: 1rem;
   color: #212529;
+  table-layout: auto;
 }
 
-.table th,
-.table td {
+.table-cell{
+  overflow-y: scroll;
+  overflow-x: auto;
+  white-space: pre-line;
+  max-height: 175px;
+  max-width: 175px;
+}
+
+.table th, td{
   padding: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;

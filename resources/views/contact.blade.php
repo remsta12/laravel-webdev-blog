@@ -6,10 +6,10 @@ MASTHEAD COMPLETELY LINKED TO IT ALL SO MUST BE INCLUDED SOMEHOW, COULD JUST MAK
 <div class="container">
   <div class="row">
     <div class="col-5">
-      <h1>DEETS</h1>
-      <p>Heres my date of birth, phone number, card number, semen sample...</p>
+      <h1>Details</h1>
+      <p>A few fake details so you cannot completely identify me</p>
       <p class="contact-address"><address><strong>Remy Corp.</strong><br>
-          131 Real Tings Drive<br>
+          131 Rest Easy Drive<br>
           Londonium, Britannia <br>
           <em>07745921033</em></address>
       </p>
@@ -25,7 +25,7 @@ MASTHEAD COMPLETELY LINKED TO IT ALL SO MUST BE INCLUDED SOMEHOW, COULD JUST MAK
 
           {!! Form::label('message', 'Please write your message') !!}
           {!! Form::textarea('message', null, ['class' => 'form-control', 'rows' => '4']) !!} <br>
-        
+
           {!! Form::submit('Submit', ['class' => 'btn btn-info']) !!}
         </div>
       {!! Form::close() !!}

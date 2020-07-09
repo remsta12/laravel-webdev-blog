@@ -22,7 +22,7 @@ class ContactController extends Controller
     $contact['email'] = $request->get('email');
     $contact['message'] = $request->get('message');
 
-    \Mail::to(config('mail.from .address'))->send(new ContactEmail($contact));
+    \Mail::to($contact['email'])->send(new ContactEmail($contact));
 
     flash('Your message has been sent!')->success();
 
