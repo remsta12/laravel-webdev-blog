@@ -19,8 +19,8 @@ class CreatePostsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('title');
-            $table->text('excerpt');
-            $table->text('body');
+            $table->string('excerpt');
+            $table->string('body');
             $table->string('image')->nullable();
             $table->timestamps();
             $table->foreign('author_id')->references('id')->on('users')->onDelete('restrict');
