@@ -9,6 +9,6 @@ Being made with the help of a few CSS templates, I implemented all other front e
 
 IMAGES:
 
-![Image of Front Page](https://ibb.co/X38C3Kw)
-![Image of Contact Form]https://ibb.co/3m8XGz8
-![Image of CMS Modal]https://ibb.co/z8Y9THf
+![Image of Front Page](https://i.ibb.co/s6HV6NB/site1.jpg)
+![Image of Contact Form](https://i.ibb.co/VYhyrmh/site2.jpg)
+![Image of CMS Modal](https://i.ibb.co/f856zG0/site3.jpg)
